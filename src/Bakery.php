@@ -14,10 +14,21 @@ class Bakery
      */
     public static function calculateOutput(array $recipe, array $ingredients): int
     {
-        $numberOfCakes = 0;
-
-        // Complete the function
-
-        return $numberOfCakes;
+        $availableIterator = array_keys($ingredients);
+        $recipeIterator = array_keys($recipe);
+        
+        foreach ($recipeIterator as $key) {
+          if(!array_key_exists($key, $ingredients)) return 0;
+        }
+        
+        $result = [];
+        
+        foreach ($availableIterator as $key) {
+          if(array_key_exists($key, $recipe) && $recipe[$key] > 0) {
+            array_push($result, floor($ingredients[$key] / $recipe[$key]));
+          }
+        }
+        
+        return min($result);
     }
 }
